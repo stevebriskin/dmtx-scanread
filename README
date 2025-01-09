@@ -1,0 +1,7 @@
+Copy of dmtxread from dmtx-utils that allows for a scanned, but unparsed, code to be returned.
+
+Installation
+MagickWand is required
+libdmtx is required
+
+Usage

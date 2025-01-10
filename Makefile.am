@@ -12,13 +12,7 @@ endif
 
 SUBDIRS = . $(DMTXREAD_DIR) 
 
-EXTRA_DIST = KNOWNBUG \
-	README.cygwin \
-	README.freebsd \
-	README.linux \
-	README.mingw \
-	README.osx \
-	README.unix \
+EXTRA_DIST = 
 	m4 \
 	script/check_all.sh \
 	script/check_comments.sh \

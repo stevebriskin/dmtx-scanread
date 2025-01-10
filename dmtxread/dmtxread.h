@@ -47,42 +47,42 @@ Contact: mike@dragonflylogic.com
 #define MagickGetImagePixels MagickExportImagePixels
 #endif
 
-
 #if ENABLE_NLS
-# include <libintl.h>
-# define _(String) gettext(String)
+#include <libintl.h>
+#define _(String) gettext(String)
 #else
-# define _(String) String
+#define _(String) String
 #endif
 #define N_(String) String
 
-typedef struct {
-   int codewords;       /* -c, --codewords */
-   int edgeMin;         /* -e, --minimum-edge */
-   int edgeMax;         /* -E, --maximum-edge */
-   int scanGap;         /* -g, --gap */
-   int timeoutMS;       /* -m, --milliseconds */
-   int newline;         /* -n, --newline */
-   int page;            /* -p, --page */
-   int squareDevn;      /* -q, --square-deviation */
-   int dpi;             /* -r, --resolution */
-   int sizeIdxExpected; /* -s, --symbol-size */
-   int edgeThresh;      /* -t, --threshold */
-   char *xMin;          /* -x, --x-range-min */
-   char *xMax;          /* -X, --x-range-max */
-   char *yMin;          /* -y, --y-range-min */
-   char *yMax;          /* -Y, --y-range-max */
-   int correctionsMax;  /* -C, --corrections-max */
-   int diagnose;        /* -D, --diagnose */
-   int mosaic;          /* -M, --mosaic */
-   int stopAfter;       /* -N, --stop-after */
-   int pageNumbers;     /* -P, --page-numbers */
-   int corners;         /* -R, --corners */
-   int shrinkMax;       /* -S, --shrink */
-   int shrinkMin;       /* -S, --shrink (if range specified) */
-   int unicode;         /* -U, --unicode */
-   int gs1;             /* -G, --gs1 */
-   int verbose;         /* -v, --verbose */
+typedef struct
+{
+      int codewords;       /* -c, --codewords */
+      int edgeMin;         /* -e, --minimum-edge */
+      int edgeMax;         /* -E, --maximum-edge */
+      int scanGap;         /* -g, --gap */
+      int timeoutMS;       /* -m, --milliseconds */
+      int newline;         /* -n, --newline */
+      int page;            /* -p, --page */
+      int squareDevn;      /* -q, --square-deviation */
+      int dpi;             /* -r, --resolution */
+      int sizeIdxExpected; /* -s, --symbol-size */
+      int edgeThresh;      /* -t, --threshold */
+      char *xMin;          /* -x, --x-range-min */
+      char *xMax;          /* -X, --x-range-max */
+      char *yMin;          /* -y, --y-range-min */
+      char *yMax;          /* -Y, --y-range-max */
+      int correctionsMax;  /* -C, --corrections-max */
+      int diagnose;        /* -D, --diagnose */
+      int mosaic;          /* -M, --mosaic */
+      int stopAfter;       /* -N, --stop-after */
+      int pageNumbers;     /* -P, --page-numbers */
+      int corners;         /* -R, --corners */
+      int shrinkMax;       /* -S, --shrink */
+      int shrinkMin;       /* -S, --shrink (if range specified) */
+      int unicode;         /* -U, --unicode */
+      int gs1;             /* -G, --gs1 */
+      int verbose;         /* -v, --verbose */
 } UserOptions;
 
 /* Functions */
@@ -91,11 +91,15 @@ static DmtxPassFail HandleArgs(UserOptions *opt, int *fileIndex, int *argcp, cha
 static void ShowUsage(int status);
 static DmtxPassFail SetDecodeOptions(DmtxDecode *dec, DmtxImage *img, UserOptions *opt);
 static DmtxPassFail PrintStats(DmtxDecode *dec, DmtxRegion *reg, DmtxMessage *msg,
-      int imgPageIndex, UserOptions *opt);
+                               int imgPageIndex, UserOptions *opt);
 static DmtxPassFail PrintMessage(DmtxRegion *reg, DmtxMessage *msg, UserOptions *opt);
 static void CleanupMagick(MagickWand **wand, int magicError);
 static void ListImageFormats(void);
 static void WriteDiagnosticImage(DmtxDecode *dec, char *imagePath);
 static int ScaleNumberString(char *s, int extent);
+
+static DmtxPassFail PopulateArrayFromMatrix(DmtxDecode *dec, DmtxRegion *reg, DmtxMessage *msg);
+static void CacheFillQuad(DmtxDecode *dec, DmtxPixelLoc p0, DmtxPixelLoc p1, DmtxPixelLoc p2, DmtxPixelLoc p3);
+static DmtxMessage *dmtxDecodeMatrixRegion_new(DmtxDecode *dec, DmtxRegion *reg, int fix, UserOptions *opt);
 
 #endif

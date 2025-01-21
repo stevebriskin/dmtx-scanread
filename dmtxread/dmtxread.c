@@ -23,7 +23,6 @@ Contact: mike@dragonflylogic.com
 */
 
 #include "dmtxread.h"
-#include "staticdmtxutil.h"
 
 char *programName;
 
@@ -33,7 +32,7 @@ char *programName;
  * @param  argv list of argument passed strings from command line
  * @return Numeric exit code
  */
-int main(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
    char *filePath;
    int i;
@@ -143,7 +142,7 @@ int main(int argc, char *argv[])
          if (dec == NULL)
          {
             CleanupMagick(&wand, DmtxFalse);
-            FatalError(EX_SOFTWARE, "decode create error");
+            FatalError(EX_SOFTWARE, "decode option error");
          }
 
          err = SetDecodeOptions(dec, img, &opt);
@@ -256,7 +255,7 @@ GetDefaultOptions(void)
  * @param  fileIndex pointer to index of first non-option arg (if successful)
  * @return DmtxPass | DmtxFail
  */
-static DmtxPassFail
+DmtxPassFail
 HandleArgs(UserOptions *opt, int *fileIndex, int *argcp, char **argvp[])
 {
    int i;
@@ -534,7 +533,7 @@ OPTIONS:\n"),
  *
  *
  */
-static DmtxPassFail
+DmtxPassFail
 SetDecodeOptions(DmtxDecode *dec, DmtxImage *img, UserOptions *opt)
 {
    int err;
@@ -613,7 +612,7 @@ SetDecodeOptions(DmtxDecode *dec, DmtxImage *img, UserOptions *opt)
  * @param  dec pointer to DmtxDecode struct
  * @return DmtxPass | DmtxFail
  */
-static DmtxPassFail
+DmtxPassFail
 PrintStats(DmtxDecode *dec, DmtxRegion *reg, DmtxMessage *msg,
            int imgPageIndex, UserOptions *opt)
 {
@@ -683,7 +682,7 @@ PrintStats(DmtxDecode *dec, DmtxRegion *reg, DmtxMessage *msg,
  *
  *
  */
-static DmtxPassFail
+DmtxPassFail
 PrintMessage(DmtxRegion *reg, DmtxMessage *msg, UserOptions *opt)
 {
    int remainingDataWords;
@@ -772,7 +771,7 @@ PrintMessage(DmtxRegion *reg, DmtxMessage *msg, UserOptions *opt)
  *
  *
  */
-static void
+void
 CleanupMagick(MagickWand **wand, int magickError)
 {
    char *excMessage;
@@ -1349,7 +1348,7 @@ CacheFillQuad(DmtxDecode *dec, DmtxPixelLoc p0, DmtxPixelLoc p1, DmtxPixelLoc p2
    free(scanlineMax);
 }
 
-static DmtxMessage *
+DmtxMessage *
 dmtxDecodeMatrixRegion_new(DmtxDecode *dec, DmtxRegion *reg, int fix, UserOptions *opt)
 {
    // fprintf(stdout, "libdmtx::dmtxDecodeMatrixRegion()\n");
@@ -1367,6 +1366,7 @@ dmtxDecodeMatrixRegion_new(DmtxDecode *dec, DmtxRegion *reg, int fix, UserOption
       return NULL;
    }
 
+/*
    msg->fnc1 = dec->fnc1;
 
    topLeft.X = bottomLeft.X = topLeft.Y = topRight.Y = -0.1;
@@ -1390,6 +1390,6 @@ dmtxDecodeMatrixRegion_new(DmtxDecode *dec, DmtxRegion *reg, int fix, UserOption
 
    // TODO: check user options and return the right thing.
    // return dmtxDecodePopulatedArray(reg->sizeIdx, msg, fix);
-
+*/
    return msg;
 }

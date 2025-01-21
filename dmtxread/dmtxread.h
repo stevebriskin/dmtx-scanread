@@ -37,11 +37,7 @@ Contact: mike@dragonflylogic.com
 #include <dmtx.h>
 #include "../common/dmtxutil.h"
 
-#ifdef IM_API_7
 #include <MagickWand/MagickWand.h>
-#else
-#include <wand/magick-wand.h>
-#endif
 
 #if MagickLibVersion > 0x645
 #define MagickGetImagePixels MagickExportImagePixels
@@ -87,19 +83,19 @@ typedef struct
 
 /* Functions */
 static UserOptions GetDefaultOptions(void);
-static DmtxPassFail HandleArgs(UserOptions *opt, int *fileIndex, int *argcp, char **argvp[]);
+DmtxPassFail HandleArgs(UserOptions *opt, int *fileIndex, int *argcp, char **argvp[]);
 static void ShowUsage(int status);
-static DmtxPassFail SetDecodeOptions(DmtxDecode *dec, DmtxImage *img, UserOptions *opt);
-static DmtxPassFail PrintStats(DmtxDecode *dec, DmtxRegion *reg, DmtxMessage *msg,
-                               int imgPageIndex, UserOptions *opt);
-static DmtxPassFail PrintMessage(DmtxRegion *reg, DmtxMessage *msg, UserOptions *opt);
-static void CleanupMagick(MagickWand **wand, int magicError);
+DmtxPassFail SetDecodeOptions(DmtxDecode *dec, DmtxImage *img, UserOptions *opt);
+DmtxPassFail PrintStats(DmtxDecode *dec, DmtxRegion *reg, DmtxMessage *msg,
+                                   int imgPageIndex, UserOptions *opt);
+DmtxPassFail PrintMessage(DmtxRegion *reg, DmtxMessage *msg, UserOptions *opt);
+void CleanupMagick(MagickWand **wand, int magicError);
 static void ListImageFormats(void);
 static void WriteDiagnosticImage(DmtxDecode *dec, char *imagePath);
 static int ScaleNumberString(char *s, int extent);
 
 static DmtxPassFail PopulateArrayFromMatrix(DmtxDecode *dec, DmtxRegion *reg, DmtxMessage *msg);
 static void CacheFillQuad(DmtxDecode *dec, DmtxPixelLoc p0, DmtxPixelLoc p1, DmtxPixelLoc p2, DmtxPixelLoc p3);
-static DmtxMessage *dmtxDecodeMatrixRegion_new(DmtxDecode *dec, DmtxRegion *reg, int fix, UserOptions *opt);
+DmtxMessage *dmtxDecodeMatrixRegion_new(DmtxDecode *dec, DmtxRegion *reg, int fix, UserOptions *opt);
 
 #endif

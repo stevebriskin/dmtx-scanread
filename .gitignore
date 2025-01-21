@@ -1,0 +1,9 @@
+*/build/
+*/CmakeFiles/
+*/CMakeCache.txt
+module/.ninja_deps
+module/.ninja_log
+module/build.ninja
+module/cmake_install.cmake
+module/dmtxscanreadmodule
+module/libdmtxread.a

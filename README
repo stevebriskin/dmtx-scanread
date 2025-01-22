@@ -3,5 +3,6 @@ Copy of dmtxread from dmtx-utils that allows for a scanned, but unparsed, code t
 Installation
 MagickWand is required
 libdmtx is required
+viam-cpp-sdk is required
 
 Usage
